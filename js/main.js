@@ -162,8 +162,8 @@ function renderHome() {
           450<span>Shades</span>OfFakes
         </h1>
         <p class="home-hero__sub fade-up fade-up--d1">
-          Dokumentierte Fakten. Aufgedeckte Missstände. Keine unbelegten Behauptungen.
-          Hier findest du Recherchen zu ${PERSONEN.length} Personen und ihren Handlungen.
+          Gefälschte GoFundMe Kampanien, inszinierte Ki unfälle, gebottete Abonennten und Fake Insta Stories. 
+          Hier findest du Recherchen zu <a href="https://instagram.com/jxn4fifty" target="_blank">Jxn4fifty</a> und <a href="https://instagram.com/lxca4fifty/" target="_blank">lxca4fifty/</a>
         </p>
         <div class="home-hero__actions fade-up fade-up--d2">
           <a href="#personen" class="btn btn--primary">Alle Personen ansehen →</a>
