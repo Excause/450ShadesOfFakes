@@ -1,84 +1,102 @@
-# MaxPortfolio — Moderne Portfolio-Website
+# 450ShadesOfFakes
 
-Eine vollständig responsive Portfolio-Website, bereit für GitHub Pages.  
-Gebaut mit **Vanilla HTML5, CSS3 und JavaScript** — kein Build-Tool nötig.
+Investigativ-Plattform zur Dokumentation von Missständen — statische Website auf GitHub Pages.
 
-## Live-Demo
+**Live:** https://excause.github.io/450ShadesOfFakes/
 
-> Nach dem Deploy verfügbar unter:  
-> `https://<dein-github-username>.github.io/<repo-name>/`
+---
 
-## Features
+## Inhalte bearbeiten
 
-- **Dark / Light Mode** — mit localStorage-Persistenz und System-Präferenz-Erkennung
-- **Responsives Design** — optimiert für Desktop, Tablet und Smartphone
-- **Smooth Navigation** — Sticky Header, aktiver Link-Highlighting, Mobile Hamburger-Menü
-- **Typed Text Effect** — animierter Titeltext in der Hero-Section
-- **Scroll-Reveal Animationen** — Elemente erscheinen beim Einblenden via Intersection Observer
-- **Animierte Skill-Bars** — Fortschrittsbalken mit CSS-Transition
-- **Zähler-Animation** — Hero-Statistiken zählen animiert hoch
-- **Projekt-Filter** — Filtere Projekte nach Kategorie (Web, App, Design)
-- **Kontaktformular** — mit Live-Validierung und Erfolgsmeldung
-- **Scroll Progress Bar** — zeigt den Lesefortschritt am oberen Rand
+Alle Inhalte liegen in einer einzigen Datei: **`js/data.js`**
+
+### Person bearbeiten / hinzufügen
+
+Öffne `js/data.js` und suche den gewünschten Eintrag in `PERSONEN`:
+
+```js
+{
+  id: 'p1',              // eindeutige ID — nie ändern!
+  name: 'Max Mustermann', // vollständiger Name
+  alias: 'Der Falsche',   // Spitzname (oder '' leer lassen)
+  initials: 'MM',         // 2-3 Buchstaben für den Avatar
+  position: 'Geschäftsführer bei Firma XY',
+  beschreibung: 'Beschreibungstext der Person...',
+  fakten: [
+    'Fakt 1: Konkreter, belegter Sachverhalt',
+    'Fakt 2: Weiterer Punkt',
+  ],
+  kategorien: ['betrug', 'manipulation'],   // aus der Liste unten
+  status: 'aktiv',         // 'aktiv' oder 'inaktiv'
+  beitraege: ['mein-artikel-slug'],  // Slugs verknüpfter Beiträge
+},
+```
+
+**Verfügbare Kategorien:** `betrug` · `tauschung` · `korruption` · `manipulation` · `sonstiges`
+
+---
+
+### Beitrag schreiben / hinzufügen
+
+Füge einen neuen Eintrag am Anfang von `BEITRAEGE` in `js/data.js` ein:
+
+```js
+{
+  slug: 'mein-neuer-beitrag',   // nur a-z, 0-9, Bindestrich — wird zur URL
+  titel: 'Titel des Beitrags',
+  datum: '2024-03-15',          // Format: YYYY-MM-DD
+  kategorie: 'betrug',
+  zusammenfassung: '1-2 Sätze als Teaser für die Übersicht.',
+  inhalt: `
+    <p>Einleitungstext...</p>
+
+    <h2>Hintergrund</h2>
+    <p>Details...</p>
+
+    <h2>Fakten</h2>
+    <ul>
+      <li>Fakt 1</li>
+      <li>Fakt 2</li>
+    </ul>
+
+    <blockquote>Direktes Zitat aus einem Dokument.</blockquote>
+  `,
+  personen: ['p1', 'p3'],  // IDs der betroffenen Personen
+  tags: ['betrug', 'finanzen'],
+},
+```
+
+---
+
+### Auf GitHub pushen (nach jeder Änderung)
+
+```bash
+cd C:/Users/maxih/modern-website
+git add js/data.js
+git commit -m "Inhalt: Person X aktualisiert / Beitrag Y hinzugefügt"
+git push origin main
+```
+
+Die Seite ist ~60 Sekunden nach dem Push live.
+
+---
 
 ## Projektstruktur
 
 ```
-modern-website/
-├── index.html          # Haupt-HTML-Datei
-├── css/
-│   └── style.css       # Alle Styles (CSS Custom Properties, Dark Mode, Animationen)
+450ShadesOfFakes/
+├── index.html        SPA-Shell (Header, Footer, App-Container)
+├── css/style.css     Alle Styles (grünes Dark-Theme)
 ├── js/
-│   └── main.js         # Alle interaktiven Features
+│   ├── data.js       ← HIER bearbeitest du alle Inhalte
+│   └── main.js       Router & Rendering-Logik
 └── README.md
 ```
 
-## Technologien
-
-| Technologie | Zweck |
-|-------------|-------|
-| HTML5 (Semantic) | Struktur & Zugänglichkeit |
-| CSS3 (Custom Properties) | Design-Tokens, Dark Mode, Animationen |
-| Vanilla JavaScript (ES6+) | Interaktivität, DOM-Manipulation |
-| Google Fonts (Inter + Fira Code) | Typografie |
-| Intersection Observer API | Scroll-Animationen |
-
-## Auf GitHub Pages deployen
-
-### Option A — Direkt im Browser
-
-1. Erstelle ein neues Repository auf [github.com](https://github.com)
-2. Lade alle Dateien hoch (Drag & Drop im Web-Interface)
-3. Gehe zu **Settings → Pages**
-4. Setze **Source** auf `Deploy from a branch` → Branch `main` → Ordner `/ (root)`
-5. Klicke **Save** — die Seite ist in ~60 Sekunden live
-
-### Option B — Via Git CLI
-
-```bash
-# Repository initialisieren
-git init
-git add .
-git commit -m "Initial commit: Portfolio website"
-
-# Mit GitHub verbinden
-git remote add origin https://github.com/<username>/<repo-name>.git
-git branch -M main
-git push -u origin main
-
-# GitHub Pages aktivieren (einmalig in den Repo-Einstellungen)
-```
-
-## Anpassung
-
-Alle wichtigen Inhalte können direkt in `index.html` geändert werden:
-
-- **Name & Beschreibung** → Hero-Section (`#home`)
-- **Skills & Prozentsätze** → About-Section (`data-width` Attribute)
-- **Projekte** → Projects-Section (jeweils ein `<article class="project-card">`)
-- **Kontaktinfos** → Contact-Section
-- **Farbpalette** → `css/style.css`, Zeile 1 (`:root` Variablen)
-
 ---
 
-*Gebaut mit ❤️ — direkt deploybar, keine Abhängigkeiten, kein Build-Step.*
+## Sicherheitshinweis
+
+Dein GitHub Personal Access Token wurde in einem Chat geteilt.
+**Erstelle sofort einen neuen Token:**
+GitHub → Settings → Developer settings → Personal access tokens → alten Token löschen → neu erstellen.
